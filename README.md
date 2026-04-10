@@ -8,6 +8,7 @@ Claude Code 自定义斜杠命令，用于快速执行 Git 工作流。
 |------|------|------|
 | `/commit` | 暂存并提交更改 | `/commit 修复登录验证逻辑` 或 `/commit`（自动生成提交信息） |
 | `/push` | 推送当前分支到远程 | `/push` 或 `/push upstream` |
+| `/merge` | 合并分支到当前分支 | `/merge develop` 或 `/merge origin/feature-xxx` |
 | `/pr` | 创建 GitHub PR | `/pr` 或 `/pr main`（指定目标分支） |
 
 ## 安装
@@ -15,7 +16,7 @@ Claude Code 自定义斜杠命令，用于快速执行 Git 工作流。
 将本仓库克隆到 `~/.claude/skills/` 目录下：
 
 ```bash
-git clone https://github.com/<your-username>/claude-code-git-workflows.git ~/.claude/skills/git-workflows
+git clone https://github.com/LJW0401/claude-code-git-workflows.git ~/.claude/skills/git-workflows
 ```
 
 ## 特性
