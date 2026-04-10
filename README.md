@@ -23,11 +23,13 @@ git clone https://github.com/LJW0401/claude-code-git-workflows.git ~/.claude/ski
 
 ### 2. 创建符号链接
 
-Claude Code 只扫描 `~/.claude/skills/<name>/SKILL.md` 一层目录，嵌套在子仓库中的 skill 无法被直接识别。需要在 `~/.claude/skills/` 下创建符号链接：
+Claude Code 只扫描 `~/.claude/skills/<name>/SKILL.md` 一层目录，嵌套在子仓库中的 skill 无法被直接识别。运行安装脚本自动创建符号链接：
 
 ```bash
-cd ~/.claude/skills && ln -s git-workflows/commit commit && ln -s git-workflows/push push && ln -s git-workflows/merge merge && ln -s git-workflows/pr pr
+~/.claude/skills/git-workflows/install.sh
 ```
+
+脚本会自动扫描仓库中所有包含 `SKILL.md` 的子目录，并在 `~/.claude/skills/` 下创建对应的符号链接。后续新增 skill 后重新运行即可。
 
 完成后目录结构如下：
 
@@ -38,6 +40,7 @@ cd ~/.claude/skills && ln -s git-workflows/commit commit && ln -s git-workflows/
 ├── merge  -> git-workflows/merge
 ├── pr     -> git-workflows/pr
 └── git-workflows/          # 仓库本体
+    ├── install.sh
     ├── commit/SKILL.md
     ├── push/SKILL.md
     ├── merge/SKILL.md
