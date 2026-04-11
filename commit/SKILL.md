@@ -26,3 +26,4 @@ allowed-tools: Bash(git *) Read Grep Glob
 - 提交信息使用中文
 - 如果没有任何更改，不要创建空提交
 - 如果 pre-commit hook 失败，修复问题后创建新提交（不要 amend）
+- 不要推送到远程仓库，除非用户明确要求
