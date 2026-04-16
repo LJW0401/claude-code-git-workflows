@@ -3,7 +3,7 @@ name: release
 description: 创建 Git tag 并发布 GitHub Release
 disable-model-invocation: true
 argument-hint: [版本号，如 v1.0.0]
-allowed-tools: Bash(git *) Bash(gh *)
+allowed-tools: Bash(git *) Bash(gh *) Bash(ls *) Bash(make *) Bash(cargo *) Bash(go *) Bash(npm *) Bash(pnpm *) Bash(yarn *) Bash(npx *) Glob Read
 ---
 
 创建语义化版本 tag 并发布 GitHub Release。
@@ -22,20 +22,32 @@ allowed-tools: Bash(git *) Bash(gh *)
    - 新功能（feat）
    - 修复（fix）
    - 其他改进
-6. 向用户确认：版本号、release notes 内容
-7. 创建 tag 并推送：
+6. 检查是否需要构建附件：
+   - 查看项目根目录是否存在 Makefile、Cargo.toml、go.mod、package.json 等构建文件
+   - 查看是否存在 `.goreleaser.yml`、`Justfile`、`build.sh` 等发布相关脚本
+   - 如果存在构建配置，询问用户是否需要构建并附加二进制/产物文件
+7. 向用户确认：版本号、release notes 内容、是否构建附件
+8. 创建 tag 并推送（先推送 tag，确保构建时能从 tag 获取正确版本号）：
    ```
    git tag -a <版本号> -m "Release <版本号>"
    git push origin <版本号>
    ```
-8. 使用 `gh release create` 发布 GitHub Release：
+9. 如果用户确认需要构建附件：
+   - 执行对应的构建命令（如 `make release`、`cargo build --release`、`go build`、`npm run build` 等）
+   - 构建完成后，列出产物文件路径和大小，供用户确认
+   - 如果构建失败，告知用户错误信息，但不要删除已推送的 tag（由用户决定是否回退）
+10. 使用 `gh release create` 发布 GitHub Release：
    ```
+   # 无附件
    gh release create <版本号> --title "Release <版本号>" --notes "$(cat <<'EOF'
    <release notes>
    EOF
    )"
+
+   # 有附件时，将文件路径追加在命令末尾
+   gh release create <版本号> --title "Release <版本号>" --notes "..." ./path/to/file1 ./path/to/file2
    ```
-9. 运行 `gh release view <版本号>` 确认发布成功，返回 release 链接
+11. 运行 `gh release view <版本号>` 确认发布成功，返回 release 链接
 
 ## 注意事项
 
@@ -44,3 +56,6 @@ allowed-tools: Bash(git *) Bash(gh *)
 - 不要使用 `--force` 覆盖已有 tag
 - 默认不标记为 prerelease，如用户要求则加 `--prerelease`
 - 默认不标记为 latest，由 GitHub 自动判断；如用户要求可加 `--latest`
+- 附件文件上传前需向用户确认文件列表和大小
+- 不要上传 `.git`、`node_modules`、临时文件等非产物文件
+- 如果构建失败，告知用户错误信息，不要继续发布
