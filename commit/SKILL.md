@@ -17,8 +17,10 @@ allowed-tools: Bash(git *) Read Grep Glob
 5. 如果用户提供了参数 `$ARGUMENTS`，则使用用户提供的信息作为提交信息
 6. 将相关文件添加到暂存区（优先按文件名添加，避免 `git add -A`）
 7. 不要提交可能包含密钥的文件（.env、credentials.json 等）
-8. 使用 HEREDOC 格式创建提交，提交信息末尾附加：
-   Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+8. 使用 HEREDOC 格式创建提交，提交信息末尾按当前模型附加对应的 `Co-Authored-By` trailer：
+   - 如果当前模型是 Claude，则附加：`Co-Authored-By: Claude <noreply@anthropic.com>`
+   - 如果当前模型是 Codex，则附加：`Co-Authored-By: Codex <noreply@openai.com>`
+   - 其他模型不附加额外 trailer
 9. 提交后运行 `git status` 确认成功
 
 ## 注意事项
