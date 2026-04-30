@@ -20,7 +20,7 @@ allowed-tools: Bash(git *) Bash(gh *) Bash(ls *) Bash(make *) Bash(cargo *) Bash
 4. 运行 `git log $(git tag --sort=-v:refname | head -1)..HEAD --oneline 2>/dev/null || git log --oneline -20` 获取自上次 release 以来的提交记录
 5. 生成 release notes：
    - **优先使用仓库根目录的 `.release.md` 模板**（如果存在）：读取整个模板作为骨架，按提交记录填充 `<VERSION>`、`<PREV_VERSION>`、功能标题、修复要点等占位符；模板里的安装/升级指引、Claude Code 署名等固定段保留原样
-   - 若 `.release.md` 不存在，退回默认结构：新功能（feat）/ 修复（fix）/ 其他改进 三段中文 notes
+   - 若 `.release.md` 不存在，退回默认结构：新功能（feat）/ 修复（fix）/ 其他改进 三段中文 notes（默认结构的写法可参考同目录下的 `assets/TEMPLATE.md`）
    - 生成后删掉模板里本次没用到的小节（例如无破坏性变更就整段删掉 ⚠️ 小节），不要留空标题
    - 所有占位符 `<...>` 必须替换干净，发布前自查一遍不能有残留
 6. 检查是否需要构建附件：
