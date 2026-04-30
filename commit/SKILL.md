@@ -13,7 +13,7 @@ allowed-tools: Bash(git *) Read Grep Glob
 1. 运行 `git status` 查看当前变更状态
 2. 运行 `git diff` 和 `git diff --staged` 查看具体更改内容
 3. 运行 `git log --oneline -5` 查看最近的提交风格
-4. 分析所有变更，草拟一条简洁的中文提交信息（1-2 句话，聚焦于"为什么"而非"改了什么"）
+4. 分析所有变更，参考 `assets/TEMPLATE.md` 草拟一条简洁的中文提交信息（1-2 句话，聚焦于"为什么"而非"改了什么"）
 5. 如果用户提供了参数 `$ARGUMENTS`，则使用用户提供的信息作为提交信息
 6. 将相关文件添加到暂存区（优先按文件名添加，避免 `git add -A`）
 7. 不要提交可能包含密钥的文件（.env、credentials.json 等）
