@@ -20,7 +20,7 @@ allowed-tools: Bash(git *) Bash(gh *) Read Grep Glob
    - `git log $(git_base)..HEAD --oneline` 查看所有待合并提交
    - `git diff $(git_base)...HEAD` 查看完整差异
 
-3. 分析所有提交和变更，草拟：
+3. 分析所有提交和变更，参考 `assets/TEMPLATE.md` 草拟：
    - PR 标题：简短（70 字符以内）
    - PR 描述：包含变更摘要和测试计划
 
