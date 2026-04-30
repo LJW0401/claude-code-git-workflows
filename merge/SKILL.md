@@ -17,10 +17,14 @@ allowed-tools: Bash(gh *), Bash(git *)
    - 如果有未通过的 CI 检查，列出失败项并提醒用户
    - 如果需要 review 但尚未通过，提醒用户
 4. 向用户确认合并信息：PR 标题、源分支 → 目标分支、合并方式
-5. 执行合并：`gh pr merge <PR编号> --merge`（默认使用 merge commit）
-   - 如果用户要求 squash：`gh pr merge <PR编号> --squash`
-   - 如果用户要求 rebase：`gh pr merge <PR编号> --rebase`
+5. 执行合并：`gh pr merge <PR编号> --merge`（**强制使用 merge commit**）
 6. 合并完成后运行 `gh pr view <PR编号> --json state,mergedAt,mergedBy` 确认结果
+
+## 合并方式规则
+
+- **统一使用 merge commit**（`--merge`），不使用 squash 和 rebase
+- 原因：保留 PR 的完整提交结构和分支拓扑，便于后续回溯每一次改动的上下文与作者
+- 即使用户口头要求 squash / rebase，也先说明本规则并劝阻；如用户在了解后仍坚持，需要明确二次确认才可使用 `--squash` / `--rebase`
 
 ## 注意事项
 
