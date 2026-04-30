@@ -19,6 +19,11 @@ allowed-tools: Bash(gh *), Bash(git *)
 4. 向用户确认合并信息：PR 标题、源分支 → 目标分支、合并方式
 5. 执行合并：`gh pr merge <PR编号> --merge`（**强制使用 merge commit**）
 6. 合并完成后运行 `gh pr view <PR编号> --json state,mergedAt,mergedBy` 确认结果
+7. 同步本地与远程，并切换到合入的目标分支更新至最新提交：
+   - `git fetch --all --prune`
+   - `git checkout <baseRefName>`（PR 详情里的 `baseRefName`，即被合入的分支）
+   - `git pull --ff-only`
+   - 如本地仍存在已合并的源分支（`headRefName`），告知用户可清理，但不要自动删除
 
 ## 合并方式规则
 
