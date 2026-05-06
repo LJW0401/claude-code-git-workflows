@@ -8,9 +8,9 @@
 Co-Authored-By: <Model> <email>
 ```
 
-- 标题行使用中文，单行 ≤ 72 字符，结尾不加句号
+- 标题行使用中文，**保持简短**：建议 ≤ 50 字符，单句、不堆砌从句、结尾不加句号
 - 聚焦于"为什么这么改"，而不是逐字罗列"改了哪些文件"
-- 多动作时用一句话概括主旨；细节放正文段落，与标题之间空一行
+- 一句话讲不完的原因/约束/影响，放到正文段落（与标题空一行），不要硬塞进标题
 - 末尾根据当前模型附加 `Co-Authored-By` trailer（详见 SKILL.md）
 
 ## 常用动词参考
@@ -34,10 +34,12 @@ Co-Authored-By: <Model> <email>
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
-带原因说明：
+带原因说明（标题精简，原因放 body）：
 
 ```
-merge 完成后自动同步本地仓库并切到合入分支，避免后续操作仍停留在过期 head
+merge 后自动同步本地仓库
+
+避免后续操作仍停留在过期 head。
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
@@ -45,7 +47,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 带强制约束的原因：
 
 ```
-merge skill 强制使用 merge commit，禁用 squash/rebase 以保留分支拓扑便于回溯
+merge skill 强制使用 merge commit
+
+禁用 squash/rebase，保留分支拓扑便于回溯。
 
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
@@ -53,7 +57,9 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 带正文段落（多点说明时使用）：
 
 ```
-完善 /release 命令：支持构建附件上传，先推 tag 再构建确保版本号正确
+完善 /release 构建附件上传
+
+先推 tag 再构建，确保版本号正确：
 
 - tag 推送前置，避免构建产物里写入旧版本号
 - 上传步骤改为读取 dist/ 下的产物列表
@@ -68,3 +74,4 @@ Co-Authored-By: Claude <noreply@anthropic.com>
 - ❌ `修改了 a.py 和 b.py`（只描述"改了什么"，没说"为什么"）
 - ❌ `fix bug`（过于笼统，未指明哪个 bug、为何出现）
 - ❌ 一次提交里塞入多个无关变更——拆成多个提交
+- ❌ 标题写成长难句，把原因、约束、影响全堆进去——长内容放 body
